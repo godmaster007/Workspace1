@@ -1,3 +1,6 @@
+# Windows 11 Essential Install Script
+
+```powershell
 # Define the combined list of winget applications
 
 # Check for Administrative privileges
@@ -18,7 +21,7 @@ $packages = @(
     "appcs.Ditto",
     "Dropbox.Dropbox",
     "7zip.7zip",
-    
+
     # Second Batch
     "Microsoft.PowerShell",
     "Python.Python.3",
@@ -66,7 +69,7 @@ $logPath = "$env:USERPROFILE\Desktop\Winget_Install_Log.txt"
 
 foreach ($pkg in $packages) {
     Write-Host "Installing $pkg..." -ForegroundColor Cyan
-    
+
     $pathBefore = [Environment]::GetEnvironmentVariable("Path", "Machine") + [Environment]::GetEnvironmentVariable("Path", "User")
     $output = winget install -e --id $pkg --accept-package-agreements --accept-source-agreements --silent --force 2>&1
     $exitCode = $LASTEXITCODE
@@ -148,3 +151,4 @@ if (Get-Command npm -ErrorAction SilentlyContinue) {
 "--------------------------------------------------" | Out-File $logPath -Append
 "Installation sequence complete." | Out-File $logPath -Append
 Write-Host "`nAll done! Check Winget_Install_Log.txt on your Desktop for the full report." -ForegroundColor Yellow
+```
